@@ -13,8 +13,8 @@ public class MillerRabin {
      * @return false: composite, true: probable prime
      */
     public static boolean millerRabin(BigInteger n) {
-        // 2
-        if (n.compareTo(BigInteger.TWO) == 0)
+        // 2或3
+        if (n.equals(BigInteger.TWO)||n.equals(BigInteger.valueOf(3)))
             return true;
             // 0 or 1 or even number
         else if (n.and(BigInteger.ONE).compareTo(BigInteger.ONE) != 0 || n.compareTo(BigInteger.ONE) == 0)

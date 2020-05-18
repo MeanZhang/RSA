@@ -71,8 +71,8 @@ public class RSA {
         BigInteger invP = ExtendedEuclideanAlgorithm.ex_gcd(p, q)[1].mod(q);
 //        //CRT
 //        BigInteger invQ = ExtendedEuclideanAlgorithm.ex_gcd(q, p)[1].mod(p);
-//        return m1.multiply(p).multiply(invP).add(m2.multiply(q).multiply(invQ)).mod(p.multiply(q));
-//
+//        return m1.multiply(q).multiply(invQ).add(m2.multiply(p).multiply(invP)).mod(p.multiply(q));
+
         //MMRC算法，速度更快
         //t = p^(-1) * (m2-m1) mod q
         BigInteger t = invP.multiply(m2.subtract(m1)).mod(q);

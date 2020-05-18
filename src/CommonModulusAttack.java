@@ -49,7 +49,7 @@ public class CommonModulusAttack {
         }
         scanner.close();
         try {
-            System.out.println(attack(e, c, n).toString());
+            System.out.println("m:\n" + attack(e, c, n).toString());
         } catch (IllegalArgumentException e1) {
             System.out.println("e's are not coprime");
         }
