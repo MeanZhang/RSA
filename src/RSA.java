@@ -5,14 +5,14 @@ import java.util.Scanner;
 public class RSA {
     /**
      * 生成密钥
+     * 其实可以直接用BigInteger probablePrime(int bitLength, Random rnd)产生可能的素数
+     * 或用boolean isProbablePrime(int certainty)进行素性检测
+     * 但是为了用到第一次实验，就重新写了
      *
      * @param length 密钥长度
      * @return (e, p, q, d, n)
      */
     public static BigInteger[] generateKey(int length) {
-        //其实可以直接用BigInteger probablePrime(int bitLength, Random rnd)产生可能的素数
-        //或用boolean isProbablePrime(int certainty)进行素性检测
-        //但是为了用到第一次实验，就重新写了
         BigInteger[] key = new BigInteger[5];
         BigInteger p = getPrime(length / 2);
         BigInteger q = getPrime(length - length / 2);
@@ -55,6 +55,7 @@ public class RSA {
 
     /**
      * RSA解密
+     * 使用了更快的MMRC算法，普通CRT方法在注释中
      *
      * @param c 密文
      * @param d 私钥d
@@ -70,7 +71,7 @@ public class RSA {
         BigInteger invP = ExtendedEuclideanAlgorithm.ex_gcd(p, q)[1].mod(q);
 //        //CRT
 //        BigInteger invQ = ExtendedEuclideanAlgorithm.ex_gcd(q, p)[1].mod(p);
-//        return m1.multiply(p).multiply(invP).add(m2.multiply(q).multiply(invQ)).mod(n);
+//        return m1.multiply(p).multiply(invP).add(m2.multiply(q).multiply(invQ)).mod(p.multiply(q));
 //
         //MMRC算法，速度更快
         //t = p^(-1) * (m2-m1) mod q
@@ -80,12 +81,12 @@ public class RSA {
 
     /**
      * 生成指定长度的可能的素数
+     * boolean isProbablePrime(int certainty)也可以进行素性检测
      *
      * @param length 长度
      * @return 可能的素数
      */
     private static BigInteger getPrime(int length) {
-        //用boolean isProbablePrime(int certainty)也可以进行素性检测
         Random random = new Random();
         BigInteger result;
         boolean flag;
