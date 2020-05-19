@@ -30,7 +30,6 @@ public class KnownEDN {
             //选择随机数g，1<g<n
             while (g.compareTo(BigInteger.ONE) <= 0 || g.compareTo(n) >= 0)
                 g = new BigInteger(n.bitLength(), random);
-            int t = 0;
             BigInteger k1 = k;
             //计算t和g^(k/2^i)的过程合在一起
             while (k1.mod(BigInteger.TWO).equals(BigInteger.ZERO)) {
@@ -63,6 +62,6 @@ public class KnownEDN {
         BigInteger n = new BigInteger(scanner.next());
         BigInteger[] pq = attack(e, d, n);
         scanner.close();
-        System.out.println("p: " + pq[0] + "\nq: " + pq[1]);
+        System.out.println("p:\n" + pq[0] + "\nq:\n" + pq[1]);
     }
 }
