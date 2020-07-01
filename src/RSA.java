@@ -52,7 +52,7 @@ public class RSA {
     }
 
     /**
-     * RSA解密 使用了更快的MMRC算法，普通CRT方法在注释中
+     * RSA解密
      *
      * @param c 密文
      * @param d 私钥d

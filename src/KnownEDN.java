@@ -4,9 +4,16 @@ import java.util.Scanner;
 
 public class KnownEDN {
     /**
-     * 已知e，d，n，分解n，参考https://www.di-mgt.com.au/rsa_factorize_n.html 算法简介： 初始化k=de-1
-     * 选择随机数g，1<g<n 计算t，k=2^t * r，r为奇数 依次计算x = g^(k/2), g^(k/4),……,g^(k/2^t) mod n
-     * 直到x>1且y=gcd(x−1,n)>1 此时p=y，q=n/p 如果找不到这样的y，就重新选择随机数g
+     * 已知e，d，n，分解n，参考https://www.di-mgt.com.au/rsa_factorize_n.html
+     * <p>
+     * 算法简介：
+     * 初始化k=de-1
+     * 选择随机数g，1<g<n
+     * 计算t，k=2^t * r，r为奇数
+     * 依次计算x = g^(k/2), g^(k/4),……,g^(k/2^t) mod n
+     * 直到x>1且y=gcd(x−1,n)>1
+     * 此时p=y，q=n/p
+     * 如果找不到这样的y，就重新选择随机数g
      *
      * @param e 公钥e
      * @param d 私钥d
