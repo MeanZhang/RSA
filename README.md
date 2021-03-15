@@ -154,7 +154,7 @@ for i = 0 to e.length-1
 
 ##### 1. 算法原理
 
-本算法原理参考自https://www.di-mgt.com.au/rsa_factorize_n.html，对次算法进行了部分改动。
+本算法原理参考自[RSA: how to factorize N given d](https://www.di-mgt.com.au/rsa_factorize_n.html)，对此算法进行了部分改动。
 
 Initially we compute $k = de-1$. We then choose a random integer $g$ in the range $1 \lt g \lt N$. Now $k$ is an even number, where $k = 2^tr$ with $r$ odd and $t\geq1$, so we can compute $x = g^{k/2}, g^{k/4}, \ldots, g^{k/2^t} \pmod N$ until $x \gt 1$ and $y = \gcd(x-1, N) \gt 1$. If so, then one of our factors, say $p$, is equal to $y$, and the other is $q=N/y$ and we are done. If we don't find a solution, then we choose another random $g$.
 
