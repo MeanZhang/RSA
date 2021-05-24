@@ -1,4 +1,3 @@
-import java.io.File;
 import java.math.BigInteger;
 import java.util.Random;
 import java.util.Scanner;
