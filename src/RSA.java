@@ -1,7 +1,13 @@
+import java.io.File;
 import java.math.BigInteger;
 import java.util.Random;
 import java.util.Scanner;
 
+/**
+ * RSA加解密类
+ *
+ * @author Mean
+ */
 public class RSA {
     /**
      * 生成密钥
@@ -10,7 +16,6 @@ public class RSA {
      * @return (e, p, q, d, n)
      */
     public static BigInteger[] generateKey(int length) {
-        BigInteger[] key = new BigInteger[5];
         Random randomP = new Random();
         BigInteger p = BigInteger.probablePrime(length / 2, randomP);
         Random randomQ = new Random();
@@ -22,20 +27,16 @@ public class RSA {
         Random randomE = new Random();
         BigInteger e = new BigInteger(faiN.bitLength(), randomE);
         // 随机产生e，使得1<e<φ(n)且gcd(φ(n),e)=1
-        while (e.compareTo(BigInteger.ONE) <= 0 || e.compareTo(faiN) >= 0 || !faiN.gcd(e).equals(BigInteger.ONE))
+        while (e.compareTo(BigInteger.ONE) <= 0 || e.compareTo(faiN) >= 0 || !faiN.gcd(e).equals(BigInteger.ONE)) {
             e = new BigInteger(faiN.bitLength(), randomE);
+        }
         // d=1/e mod φ(n)
         BigInteger d = e.modInverse(faiN);
-        key[0] = e;
-        key[1] = p;
-        key[2] = q;
-        key[3] = d;
-        key[4] = n;
-        return key;
+        return new BigInteger[]{e, p, q, d, n};
     }
 
     /**
-     * RSA加密，该方法仅计算，不生成密钥，不分组
+     * RSA加密
      *
      * @param m 明文
      * @param e 公钥e
@@ -45,8 +46,9 @@ public class RSA {
      */
     public static BigInteger encrypt(BigInteger m, BigInteger e, BigInteger n) {
         // 如果m >= n，抛出非法参数异常
-        if (m.compareTo(n) >= 0)
+        if (m.compareTo(n) >= 0) {
             throw new IllegalArgumentException();
+        }
         // c=m^e mod n
         return m.modPow(e, n);
     }
